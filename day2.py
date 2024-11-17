@@ -6,5 +6,4 @@ bill_share = int(input("How many people to split the bill?"))
 
 total_pay = total_amount*(1+tip_amount/100)
 bill_per_person = round(total_pay / bill_share, 2)
-
 print(f"Each person should pay: ${bill_per_person}")
