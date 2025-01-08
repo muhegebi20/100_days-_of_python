@@ -1,37 +1,26 @@
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower();
-text = input("Type your message:\n").lower();
-shift = int(input("Type the shift number:\n"))
-
-def encrypt(original_txt, shift):
-    encoded = ""
-    for l in original_txt:
-        if l == ' ':
-            continue;
-        ind = alphabet.index(l) + shift
-        if ind > len(alphabet)-1:
-            encoded+= alphabet[ind%len(alphabet)]
-        else:
-            encoded+=alphabet[ind]
-    return encoded;
 
 
-def decrypt(encoded_message, shift):
+def ceaser(original_text, shift, direction):
     message = ""
-    for l in encoded_message:
-        ind = alphabet.index(l) - shift
-        if ind < 0:
-            message += alphabet[ind+len(alphabet)]
-        else:
-            message += alphabet[ind]
-    return message;
+    if direction == "decode":
+        shift*=-1
+    for l in original_text:
+        if l not in alphabet:
+            message+=l
+            continue
+        ind = alphabet.index(l) + shift
+        ind %= len(alphabet)
+        message+=alphabet[ind]
+    print(f"here is the {direction}d message: {message}")
 
-
-
-if direction == "encode":
-    crypto_message = encrypt(text, shift)
-    print(crypto_message)
-else:
-    decoded = decrypt(encoded_message=text, shift=shift)
-    print(decoded)
+play = True
+while play:
+    ask = input("do you want to play, type yes/no: ").lower()
+    if ask == "no":
+        break;
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower();
+    text = input("Type your message:\n").lower();
+    shift = int(input("Type the shift number:\n"))
+    ceaser(text, shift, direction)
