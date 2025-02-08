@@ -19,6 +19,7 @@ while not closeMachine:
     else:
         if order == "report":
             coffemaker.report()
+            machine.report()
         else:
             closeMachine = True
     
